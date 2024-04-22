@@ -1,6 +1,8 @@
+import { ShoppingBagIcon } from "@heroicons/react/24/solid"
 import { useContext } from "react"
 import { NavLink } from "react-router-dom"
 import { ShoppingCartContext } from "../../Context"
+
 
 
 
@@ -17,44 +19,44 @@ export const Navbar = () => {
           </NavLink>
         </li>
         <li>
-          <NavLink 
-          to='/'
-          className={({isActive}) => isActive ? activeStyle : undefined}>
+          <NavLink
+            to='/'
+            className={({ isActive }) => isActive ? activeStyle : undefined}>
             All
           </NavLink>
         </li>
         <li>
-          <NavLink 
-          to='/clothes'
-          className={({isActive}) => isActive ? activeStyle : undefined}>
+          <NavLink
+            to='/clothes'
+            className={({ isActive }) => isActive ? activeStyle : undefined}>
             Clothes
           </NavLink>
         </li>
         <li>
-          <NavLink 
-          to='/Electronics'
-          className={({isActive}) => isActive ? activeStyle : undefined}>
+          <NavLink
+            to='/Electronics'
+            className={({ isActive }) => isActive ? activeStyle : undefined}>
             Electronics
           </NavLink>
         </li>
         <li>
-          <NavLink 
-          to='/furnitures'
-          className={({isActive}) => isActive ? activeStyle : undefined}>
+          <NavLink
+            to='/furnitures'
+            className={({ isActive }) => isActive ? activeStyle : undefined}>
             Furnitures
           </NavLink>
         </li>
         <li>
-          <NavLink 
-          to='/toys'
-          className={({isActive}) => isActive ? activeStyle : undefined}>
+          <NavLink
+            to='/toys'
+            className={({ isActive }) => isActive ? activeStyle : undefined}>
             Toys
           </NavLink>
         </li>
         <li>
-          <NavLink 
-          to='/others'
-          className={({isActive}) => isActive ? activeStyle : undefined}>
+          <NavLink
+            to='/others'
+            className={({ isActive }) => isActive ? activeStyle : undefined}>
             Others
           </NavLink>
         </li>
@@ -64,30 +66,33 @@ export const Navbar = () => {
           daparamo@hotmail.com
         </li>
         <li>
-          <NavLink 
-          to='/my-orders'
-          className={({isActive}) => isActive ? activeStyle : undefined}>
+          <NavLink
+            to='/my-orders'
+            className={({ isActive }) => isActive ? activeStyle : undefined}>
             My Orders
           </NavLink>
         </li>
         <li>
-          <NavLink 
-          to='/my-account'
-          className={({isActive}) => isActive ? activeStyle : undefined}>
+          <NavLink
+            to='/my-account'
+            className={({ isActive }) => isActive ? activeStyle : undefined}>
             My Account
           </NavLink>
         </li>
         <li>
-          <NavLink 
-          to='/sign-in'
-          className={({isActive}) => isActive ? activeStyle : undefined}>
+          <NavLink
+            to='/sign-in'
+            className={({ isActive }) => isActive ? activeStyle : undefined}>
             Sign In
           </NavLink>
         </li>
         <li>
-          <NavLink 
-          to='/my-order'>
-            🛒 {context.count}
+          <NavLink className="flex items-center justify-center"
+            to='/my-order'>
+            <ShoppingBagIcon className="h-6 w-6 text-black" />
+            <div>
+              {context.count}
+            </div>
           </NavLink>
         </li>
       </ul>
