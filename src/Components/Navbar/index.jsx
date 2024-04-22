@@ -97,7 +97,7 @@ export const Navbar = () => {
             to='/my-order'>
             <ShoppingBagIcon className="h-6 w-6 text-black" />
             <div>
-              {context.count}
+              {context.cartProducts.length}
             </div>
           </NavLink>
         </li>
