@@ -1,4 +1,4 @@
-import { createContext, useState } from "react"
+import { createContext, useState, useEffect } from "react"
 
 export const ShoppingCartContext = createContext()
 
@@ -25,6 +25,60 @@ export const ShoppingCartProvider = ({ children }) => {
   //shopping cart . order 
   const [order, setOrder] = useState([])
 
+  //get Products 
+  const [items, setItems] = useState(null)
+  const [filteredItems, setFilteredItems] = useState(null)
+
+  //get Products By Title
+  const [searchByTitle, setSearchByTitle] = useState(null)
+
+  //get Products by Tag "Category"
+  const [searchByTag, setSearchByTag] = useState(null)
+
+  useEffect(() => {
+    fetch('https://api.escuelajs.co/api/v1/products')
+      .then(res => res.json())
+      .then(data => setItems(data))
+  }, [])
+
+  const filteredItemsByTitle = (items, searchByTitle) => {
+    return items?.filter(item => item.title.toLowerCase().includes(searchByTitle.toLowerCase()))
+  }
+
+  const filteredItemsByTag = (items, searchByTag) => {
+    return items?.filter(item => item.category.name.toLowerCase().includes(searchByTag.toLowerCase()))
+  }
+
+  const filterBy = (searchType, items, searchByTitle, searchByTag) => {
+    if (searchType == 'BY_TITLE') {
+      return filteredItemsByTitle(items, searchByTitle)
+    }
+    if (searchType == 'BY_TAG') {
+      return filteredItemsByTag(items, searchByTag)
+    }
+    if (searchType == 'BY_TITLE_AND_TAG') {
+      return filteredItemsByTag(items, searchByTag).filter(item => item.title.toLowerCase().includes(searchByTitle.toLowerCase()))
+    }
+    if (!searchType) {
+      return items
+    }
+  }
+
+
+  useEffect(() => {
+    if (searchByTitle && searchByTag) setFilteredItems(filterBy('BY_TITLE_AND_TAG', items, searchByTitle, searchByTag))
+    if (searchByTitle && !searchByTag) setFilteredItems(filterBy('BY_TITLE', items, searchByTitle, searchByTag))
+    if (!searchByTitle && searchByTag) setFilteredItems(filterBy('BY_TAG', items, searchByTitle, searchByTag))
+    if (!searchByTitle && !searchByTag) setFilteredItems(filterBy(null, items, searchByTitle, searchByTag))
+  }, [items, searchByTitle, searchByTag])
+
+
+
+
+
+
+
+
   return (
     <ShoppingCartContext.Provider value={{
       count,
@@ -40,7 +94,15 @@ export const ShoppingCartProvider = ({ children }) => {
       cartProducts,
       setCartProducts,
       order,
-      setOrder
+      setOrder,
+      items,
+      setItems,
+      searchByTitle,
+      setSearchByTitle,
+      filteredItems,
+      setFilteredItems,
+      searchByTag,
+      setSearchByTag
     }}>
       {children}
     </ShoppingCartContext.Provider>
