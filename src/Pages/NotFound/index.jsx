@@ -1,8 +1,10 @@
+import { Layout } from "../../Components/Layout"
+
 export const NotFound = () => {
     return (
-        <div>
+        <Layout>
             404
-        </div>
+        </Layout>
     )
 
 }
