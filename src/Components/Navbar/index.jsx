@@ -4,7 +4,7 @@ import { ShoppingBagIcon } from '@heroicons/react/24/solid'
 import { ShoppingCartContext } from '../../Context'
 import { ShoppingCart } from '../ShoppingCart/ShoppingCart'
 
-export const Navbar = () =>{
+export const Navbar = () => {
   const context = useContext(ShoppingCartContext)
   const activeStyle = 'underline underline-offset-4'
 
@@ -62,7 +62,7 @@ export const Navbar = () =>{
         <li>
           <NavLink
             to="/sign-in"
-            className={({ isActive }) => isActive ? activeStyle : undefined }
+            className={({ isActive }) => isActive ? activeStyle : undefined}
             onClick={() => handleSignOut()}>
             Sign in
           </NavLink>
